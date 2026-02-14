@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: car-parking
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:testdb
+      username: teste
+      password:
+      driver-class-name: org.h2.Driver
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+
