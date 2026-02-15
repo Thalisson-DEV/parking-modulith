@@ -1,10 +1,8 @@
-package com.example.carparking.entry.api;
+package com.example.carparking.entry.infrastructure.web;
 
-import com.example.carparking.entry.api.dto.ParkingEntryRequest;
-import com.example.carparking.entry.api.dto.ParkingEntryResponse;
-import com.example.carparking.entry.domain.ParkingEntry;
+import com.example.carparking.entry.infrastructure.web.dto.ParkingEntryResponse;
+import com.example.carparking.entry.domain.model.ParkingEntry;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")

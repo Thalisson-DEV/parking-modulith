@@ -1,6 +1,6 @@
-package com.example.carparking.entry.domain;
+package com.example.carparking.entry.domain.repository;
 
-import com.example.carparking.entry.domain.ParkingEntry;
+import com.example.carparking.entry.domain.model.ParkingEntry;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.example.carparking.entry.api.dto;
+package com.example.carparking.entry.infrastructure.web.dto;
 
 import java.time.LocalDateTime;
 

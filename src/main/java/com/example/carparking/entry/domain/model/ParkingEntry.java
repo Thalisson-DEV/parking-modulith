@@ -1,6 +1,7 @@
-package com.example.carparking.entry.domain;
+package com.example.carparking.entry.domain.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,7 @@ public class ParkingEntry {
     private LocalDateTime exitTime;
     private boolean active;
 
-    public static ParkingEntry create(String vehicleNumber) {
-        Objects.requireNonNull(vehicleNumber, "Vehicle number cannot be null");
+    public static ParkingEntry create(@NotNull(message = "Vehicle number cannot be null") String vehicleNumber) {
         ParkingEntry entry = new ParkingEntry();
         entry.vehicleNumber = vehicleNumber;
         entry.entryTime = LocalDateTime.now();

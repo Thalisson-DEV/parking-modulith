@@ -1,10 +1,7 @@
 package com.example.carparking.entry.application;
 
-import com.example.carparking.entry.api.ParkingEntryMapper;
-import com.example.carparking.entry.api.dto.ParkingEntryResponse;
-import com.example.carparking.entry.api.dto.ParkingExitRequest;
-import com.example.carparking.entry.domain.ParkingEntry;
-import com.example.carparking.entry.domain.ParkingEntryRepository;
+import com.example.carparking.entry.domain.model.ParkingEntry;
+import com.example.carparking.entry.domain.repository.ParkingEntryRepository;
 import com.example.carparking.event.VehicleExitedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,15 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ExitService {
+public class VehicleExitUseCase {
 
     private final ParkingEntryRepository repository;
     private final ApplicationEventPublisher publisher;
-    private final ParkingEntryMapper mapper;
 
     @Transactional
-    public ParkingEntryResponse vehicleExit(ParkingExitRequest request) {
-        ParkingEntry entry = repository.findByVehicleNumberAndActiveTrue(request.vehicleNumber())
+    public ParkingEntry vehicleExit(String vehicleNumber) {
+        ParkingEntry entry = repository.findByVehicleNumberAndActiveTrue(vehicleNumber)
                 .orElseThrow(() -> new IllegalArgumentException("Active vehicle not found"));
         
         entry.recordExit();
@@ -30,6 +26,6 @@ public class ExitService {
 
         publisher.publishEvent(new VehicleExitedEvent(savedEntry.getVehicleNumber(), savedEntry.getEntryTime(), savedEntry.getExitTime()));
 
-        return mapper.toDto(savedEntry);
+        return savedEntry;
     }
 }
