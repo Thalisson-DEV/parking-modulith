@@ -1,17 +1,17 @@
 package com.example.carparking.entry;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity(name = "parking_entry")
 @Table(name = "parking_entry")
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ParkingEntry {
 
     @Id
@@ -21,4 +21,34 @@ public class ParkingEntry {
     private LocalDateTime entryTime;
     private LocalDateTime exitTime;
     private boolean active;
+
+    public static ParkingEntry create(String vehicleNumber) {
+        Objects.requireNonNull(vehicleNumber, "Vehicle number cannot be null");
+        ParkingEntry entry = new ParkingEntry();
+        entry.vehicleNumber = vehicleNumber;
+        entry.entryTime = LocalDateTime.now();
+        entry.active = true;
+        return entry;
+    }
+
+    public void recordExit() {
+        if (!this.active) {
+            throw new IllegalStateException("Cannot record exit for an inactive parking entry.");
+        }
+        this.active = false;
+        this.exitTime = LocalDateTime.now();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParkingEntry that = (ParkingEntry) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

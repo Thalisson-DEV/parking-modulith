@@ -23,10 +23,8 @@ public class EntryService {
 
     @Transactional
     public ParkingEntryResponse vehicleEntry(ParkingEntryRequest request) {
-        ParkingEntry entry = mapper.toEntity(request);
-        entry.setEntryTime(LocalDateTime.now());
-        entry.setActive(true);
-        ParkingEntry savedEntry = repository.save(entry);
+        ParkingEntry newEntry = ParkingEntry.create(request.vehicleNumber());
+        ParkingEntry savedEntry = repository.save(newEntry);
         publisher.publishEvent(new VehicleEnteredEvent(savedEntry.getVehicleNumber(), savedEntry.getEntryTime()));
 
         return mapper.toDto(savedEntry);

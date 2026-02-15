@@ -22,9 +22,10 @@ public class ExitService {
     @Transactional
     public ParkingEntryResponse vehicleExit(ParkingExitRequest request) {
         ParkingEntry entry = repository.findByVehicleNumberAndActiveTrue(request.vehicleNumber())
-                .orElseThrow(() -> new IllegalArgumentException("Vehicle not found"));
-        entry.setActive(false);
-        entry.setExitTime(LocalDateTime.now());
+                .orElseThrow(() -> new IllegalArgumentException("Active vehicle not found"));
+        
+        entry.recordExit();
+        
         ParkingEntry savedEntry = repository.save(entry);
 
         publisher.publishEvent(new VehicleExitedEvent(savedEntry.getVehicleNumber(), savedEntry.getEntryTime(), savedEntry.getExitTime()));
