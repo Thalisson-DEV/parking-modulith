@@ -1,8 +1,10 @@
-package com.example.carparking.entry;
+package com.example.carparking.entry.application;
 
-import com.example.carparking.entry.dto.ParkingEntryMapper;
-import com.example.carparking.entry.dto.ParkingEntryRequest;
-import com.example.carparking.entry.dto.ParkingEntryResponse;
+import com.example.carparking.entry.api.ParkingEntryMapper;
+import com.example.carparking.entry.api.dto.ParkingEntryRequest;
+import com.example.carparking.entry.api.dto.ParkingEntryResponse;
+import com.example.carparking.entry.domain.ParkingEntry;
+import com.example.carparking.entry.domain.ParkingEntryRepository;
 import com.example.carparking.event.VehicleEnteredEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -10,8 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor

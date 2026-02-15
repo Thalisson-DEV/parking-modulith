@@ -1,4 +1,4 @@
-package com.example.carparking.entry;
+package com.example.carparking.entry.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

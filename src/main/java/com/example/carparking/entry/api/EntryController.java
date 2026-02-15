@@ -1,8 +1,10 @@
-package com.example.carparking.entry;
+package com.example.carparking.entry.api;
 
-import com.example.carparking.entry.dto.ParkingEntryRequest;
-import com.example.carparking.entry.dto.ParkingEntryResponse;
-import com.example.carparking.entry.dto.ParkingExitRequest;
+import com.example.carparking.entry.api.dto.ParkingEntryRequest;
+import com.example.carparking.entry.api.dto.ParkingEntryResponse;
+import com.example.carparking.entry.api.dto.ParkingExitRequest;
+import com.example.carparking.entry.application.EntryService;
+import com.example.carparking.entry.application.ExitService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
