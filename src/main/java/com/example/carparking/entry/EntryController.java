@@ -1,11 +1,16 @@
 package com.example.carparking.entry;
 
+import com.example.carparking.entry.dto.ParkingEntryRequest;
+import com.example.carparking.entry.dto.ParkingEntryResponse;
+import com.example.carparking.entry.dto.ParkingExitRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/parking")
@@ -16,14 +21,24 @@ public class EntryController {
     private final ExitService exitService;
 
     @PostMapping("/entry")
-    public ResponseEntity<String> vehicleEntry(@RequestParam String vehicleNumber) {
-        entryService.vehicleEntry(vehicleNumber);
-        return ResponseEntity.ok("Vehicle entered successfully");
+    public ResponseEntity<ParkingEntryResponse> vehicleEntry(@RequestBody @Valid ParkingEntryRequest request) {
+        ParkingEntryResponse response = entryService.vehicleEntry(request);
+        return ResponseEntity.created(URI.create("/api/v1/parking/" + response.id())).body(response);
     }
 
     @PostMapping("/exit")
-    public ResponseEntity<String> vehicleExit(@RequestParam String vehicleNumber) {
-        exitService.vehicleExit(vehicleNumber);
-        return ResponseEntity.ok("Vehicle exited successfully");
+    public ResponseEntity<ParkingEntryResponse> vehicleExit(@RequestBody @Valid ParkingExitRequest request) {
+        ParkingEntryResponse response = exitService.vehicleExit(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<ParkingEntryResponse>> getAllEntries(Pageable pageable) {
+        return ResponseEntity.ok(entryService.getAllEntries(pageable));
+    }
+
+    @GetMapping("/actives")
+    public ResponseEntity<Page<ParkingEntryResponse>> getActives(Pageable pageable) {
+        return ResponseEntity.ok(entryService.getActives(pageable));
     }
 }
