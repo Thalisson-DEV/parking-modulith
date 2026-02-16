@@ -1,8 +1,8 @@
-package com.example.carparking.entry.infrastructure.web.dto;
+package com.example.carparking.entry.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record ParkingEntryRequest(
+public record ParkingExitRequest(
         @NotBlank(message = "Vehicle number is required")
         String vehicleNumber
 ) {

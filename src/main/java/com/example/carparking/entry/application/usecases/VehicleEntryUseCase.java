@@ -1,8 +1,9 @@
-package com.example.carparking.entry.application;
+package com.example.carparking.entry.application.usecases;
 
-import com.example.carparking.entry.domain.model.ParkingEntry;
-import com.example.carparking.entry.domain.repository.ParkingEntryRepository;
+import com.example.carparking.entry.domain.ParkingEntry;
+import com.example.carparking.entry.infrastructure.percistence.ParkingEntryRepository;
 import com.example.carparking.event.VehicleEnteredEvent;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,10 @@ public class VehicleEntryUseCase {
     private final ApplicationEventPublisher publisher;
 
     @Transactional
-    public ParkingEntry vehicleEntry(String vehicleNumber) {
+    public ParkingEntry vehicleEntry(@Valid String vehicleNumber) {
+        if (repository.existsByVehicleNumber(vehicleNumber)) {
+            throw new IllegalArgumentException("Vehicle has a entry already registered.");
+        }
         ParkingEntry newEntry = ParkingEntry.create(vehicleNumber);
         ParkingEntry savedEntry = repository.save(newEntry);
 
@@ -27,13 +31,5 @@ public class VehicleEntryUseCase {
         return savedEntry;
     }
 
-    @Transactional(readOnly = true)
-    public Page<ParkingEntry> getAllEntries(Pageable pageable) {
-        return repository.findAll(pageable);
-    }
 
-    @Transactional(readOnly = true)
-    public Page<ParkingEntry> getActives(Pageable pageable) {
-        return repository.findAllByActiveTrue(pageable);
-    }
 }

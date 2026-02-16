@@ -1,4 +1,4 @@
-package com.example.carparking.entry.domain.model;
+package com.example.carparking.entry.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
