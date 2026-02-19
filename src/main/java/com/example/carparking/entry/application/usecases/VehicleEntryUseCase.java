@@ -6,8 +6,6 @@ import com.example.carparking.event.VehicleEnteredEvent;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +18,7 @@ public class VehicleEntryUseCase {
 
     @Transactional
     public ParkingEntry vehicleEntry(@Valid String vehicleNumber) {
-        if (repository.existsByVehicleNumber(vehicleNumber)) {
+        if (repository.existsByVehicleNumberAndActiveTrue(vehicleNumber)) {
             throw new IllegalArgumentException("Vehicle has a entry already registered.");
         }
         ParkingEntry newEntry = ParkingEntry.create(vehicleNumber);

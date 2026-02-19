@@ -15,5 +15,5 @@ public interface ParkingEntryRepository extends JpaRepository<ParkingEntry, Long
 
     Optional<ParkingEntry> findByVehicleNumber(String vehicleNumber);
 
-    boolean existsByVehicleNumber(String vehicleNumber);
+    boolean existsByVehicleNumberAndActiveTrue(String vehicleNumber);
 }

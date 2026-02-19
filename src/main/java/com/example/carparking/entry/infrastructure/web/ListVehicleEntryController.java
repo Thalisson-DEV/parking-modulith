@@ -35,7 +35,7 @@ public class ListVehicleEntryController {
     }
 
     @GetMapping("/parking/entry/vehicle-number/{vehicleNumber}")
-    public ResponseEntity<ParkingEntryResponse> findByVehicleNumber(@PathVariable @Valid String vehicleNumber) {
+    public ResponseEntity<ParkingEntryResponse> findByVehicleNumber(@PathVariable("vehicleNumber") @Valid String vehicleNumber) {
         ParkingEntry entry = listVehicleEntryUseCase.findByVehicleNumber(vehicleNumber);
         return ResponseEntity.ok(mapper.toDto(entry));
     }

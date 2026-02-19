@@ -4,8 +4,8 @@ import com.example.carparking.entry.domain.ParkingEntry;
 import com.example.carparking.entry.infrastructure.percistence.ParkingEntryRepository;
 import com.example.carparking.event.PaymentSuccessfulEvent;
 import com.example.carparking.event.VehicleExitInitiatedEvent;
-import com.example.carparking.event.VehicleExitedEvent; // Added
-import jakarta.persistence.EntityNotFoundException; // Added
+import com.example.carparking.event.VehicleExitedEvent;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;

@@ -32,7 +32,7 @@ public class ListSlotController {
     }
 
     @GetMapping("/slot/slot-code/{slotCode}")
-    public ResponseEntity<SlotCreatedResponse> findBySlotCode(@PathVariable @Valid String slotCode) {
+    public ResponseEntity<SlotCreatedResponse> findBySlotCode(@PathVariable("slotCode") @Valid String slotCode) {
         Slot slot = listSlotUseCase.findBySlotCode(slotCode);
         return ResponseEntity.ok(mapper.toDto(slot));
     }
