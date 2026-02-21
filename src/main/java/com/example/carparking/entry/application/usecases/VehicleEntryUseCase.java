@@ -19,7 +19,7 @@ public class VehicleEntryUseCase {
     @Transactional
     public ParkingEntry vehicleEntry(@Valid String vehicleNumber) {
         if (repository.existsByVehicleNumberAndActiveTrue(vehicleNumber)) {
-            throw new IllegalArgumentException("Vehicle has a entry already registered.");
+            throw new IllegalArgumentException("Vehicle has a active entry registered.");
         }
         ParkingEntry newEntry = ParkingEntry.create(vehicleNumber);
         ParkingEntry savedEntry = repository.save(newEntry);

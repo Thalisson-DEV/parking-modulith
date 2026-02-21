@@ -2,6 +2,7 @@ package com.example.carparking.entry.infrastructure.web;
 
 import com.example.carparking.entry.application.mappers.VehicleEntryMapper;
 import com.example.carparking.entry.application.usecases.VehicleEntryUseCase;
+import com.example.carparking.entry.doc.VehicleEntryControllerDocs;
 import com.example.carparking.entry.domain.ParkingEntry;
 import com.example.carparking.entry.application.dto.ParkingEntryRequest;
 import com.example.carparking.entry.application.dto.ParkingEntryResponse;
@@ -15,7 +16,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-public class VehicleEntryController {
+public class VehicleEntryController implements VehicleEntryControllerDocs {
 
     private final VehicleEntryUseCase vehicleEntryUseCase;
     private final VehicleEntryMapper mapper;

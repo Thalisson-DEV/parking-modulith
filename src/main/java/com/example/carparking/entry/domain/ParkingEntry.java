@@ -2,6 +2,7 @@ package com.example.carparking.entry.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,11 @@ public class ParkingEntry {
     private LocalDateTime exitTime;
     private boolean active;
 
-    public static ParkingEntry create(@NotNull(message = "Vehicle number cannot be null") String vehicleNumber) {
+    public static ParkingEntry create(
+            @Size(min = 7, max = 7, message = "Vehicle number must be 7 digits long")
+            @NotNull(message = "Vehicle number cannot be null")
+            String vehicleNumber
+    ) {
         ParkingEntry entry = new ParkingEntry();
         entry.vehicleNumber = vehicleNumber;
         entry.entryTime = LocalDateTime.now();

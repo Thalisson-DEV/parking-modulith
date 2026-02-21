@@ -4,6 +4,7 @@ import com.example.carparking.entry.domain.ParkingEntry;
 import com.example.carparking.entry.infrastructure.percistence.ParkingEntryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +28,11 @@ public class ListVehicleEntryUseCase {
     }
 
     @Transactional(readOnly = true)
-    public ParkingEntry findByVehicleNumber(@NotNull(message = "Vehicle number cannot be null.") String vehicleNumber) {
+    public ParkingEntry findByVehicleNumber(
+            @NotNull(message = "Vehicle number cannot be null.")
+            @Size(min = 4, max = 7, message = "Vehicle number must be 7 digits long.")
+            String vehicleNumber
+    ) {
         return repository.findByVehicleNumber(vehicleNumber)
                 .orElseThrow(() -> new EntityNotFoundException("Active vehicle not found"));
     }

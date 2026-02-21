@@ -1,5 +1,6 @@
 package com.example.carparking.allocation.infrastructure.web;
 
+import com.example.carparking.allocation.doc.ListSlotControllerDocs;
 import com.example.carparking.allocation.application.dto.SlotCreatedResponse;
 import com.example.carparking.allocation.application.mappers.SlotMapper;
 import com.example.carparking.allocation.application.usecases.ListSlotUseCase;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-public class ListSlotController {
+public class ListSlotController implements ListSlotControllerDocs {
 
     private final ListSlotUseCase listSlotUseCase;
     private final SlotMapper mapper;

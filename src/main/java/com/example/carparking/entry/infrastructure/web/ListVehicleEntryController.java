@@ -1,5 +1,6 @@
 package com.example.carparking.entry.infrastructure.web;
 
+import com.example.carparking.entry.doc.ListVehicleEntryControllerDocs;
 import com.example.carparking.entry.application.dto.ParkingEntryResponse;
 import com.example.carparking.entry.application.mappers.VehicleEntryMapper;
 import com.example.carparking.entry.application.usecases.ListVehicleEntryUseCase;
@@ -8,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-public class ListVehicleEntryController {
+public class ListVehicleEntryController implements ListVehicleEntryControllerDocs {
 
     private final ListVehicleEntryUseCase listVehicleEntryUseCase;
     private final VehicleEntryMapper mapper;

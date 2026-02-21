@@ -126,11 +126,11 @@ Aqui estão alguns dos endpoints principais disponíveis:
 - [x] Remover imports desnecessários em todo o projeto.
 - [x] Adicionar testes unitários para todos os UseCases e Controllers.
 - [ ] Documentar interativamente todos os controllers com anotações do Swagger (OpenAPI).
+- [ ] Melhorar validações de requests
 - [x] Dividir ambientes de desenvolvimento (Dev e Prod)
 - [x] Adicionar banco de dados postgres no ambiente de Dev e Prod.
 - [ ] Implementar uma camada de segurança JWT na aplicação.
 - [ ] Implementar RateLimit para evitar ataques de DDOS (juntamente da camada de segurança).
-- [ ] Implementar cache com redis.
 - [x] Criar docker compose para orquestrar aos containers.
 
 

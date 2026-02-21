@@ -1,5 +1,6 @@
 package com.example.carparking.billing.infrastructure.web;
 
+import com.example.carparking.billing.doc.ProcessPaymentControllerDocs;
 import com.example.carparking.billing.application.dto.PaymentRequest;
 import com.example.carparking.billing.application.dto.PaymentResponse;
 import com.example.carparking.billing.application.mappers.BillingMapper;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-public class ProcessPaymentController {
+public class ProcessPaymentController implements ProcessPaymentControllerDocs {
 
     private final ProcessBillingPaymentUseCase processBillingPaymentUseCase;
     private final BillingMapper mapper;

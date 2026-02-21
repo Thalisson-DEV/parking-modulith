@@ -4,6 +4,7 @@ import com.example.carparking.entry.application.dto.ParkingEntryResponse;
 import com.example.carparking.entry.application.dto.ParkingExitRequest;
 import com.example.carparking.entry.application.mappers.VehicleEntryMapper;
 import com.example.carparking.entry.application.usecases.VehicleExitUseCase;
+import com.example.carparking.entry.doc.VehicleExitControllerDocs;
 import com.example.carparking.entry.domain.ParkingEntry;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-public class VehicleExitController {
+public class VehicleExitController implements VehicleExitControllerDocs {
 
     private final VehicleExitUseCase vehicleExitUseCase;
     private final VehicleEntryMapper mapper;
